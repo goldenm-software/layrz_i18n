@@ -2,7 +2,10 @@
 
 ## 1.0.0
 
-- **New**: `BuildContext` extension `LayrzI18nContextExtension` with `i18n` and `maybeI18n` getters for ergonomic access to translations (`context.i18n.t('key')` instead of `LayrzAppLocalizations.of(context).t('key')`)
+- **Breaking**: `LayrzAppLocalizations` is now `LayrzI18n`
+- **Breaking**: `LayrzAppLocalizationsDelegate` is now `LayrzI18nDelegate`
+- **Breaking**: `debugCheckHasLayrzAppLocalizations(BuildContext)` is now `debugCheckHasLayrzI18n(BuildContext)`
+- **New**: `BuildContext` extension `LayrzI18nContextExtension` with `i18n` and `maybeI18n` getters for ergonomic access to translations (`context.i18n.t('key')` instead of `LayrzI18n.of(context).t('key')`)
 - **Note**: Depends on the Flutter SDK, `freezed_annotation`, `json_annotation`, `collection`, and `web`. No dependency on Material Design or layrz_models; works with WidgetsApp and custom widget trees.
 - **New**: Single-pass tokenizer with template caching for efficient message rendering
 - **New**: Content-keyed template cache (up to 1,024 entries) — entries never stale across locale switches
