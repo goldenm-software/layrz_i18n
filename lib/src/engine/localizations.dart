@@ -11,14 +11,14 @@ import 'template.dart';
 ///
 /// Provides methods to translate keys with and without pluralization, with plain
 /// arguments and rich text arguments. Supports developer mode for debugging.
-class LayrzAppLocalizations {
-  /// Creates a new [LayrzAppLocalizations] instance.
+class LayrzI18n {
+  /// Creates a new [LayrzI18n] instance.
   ///
   /// Arguments:
   /// [languages] is the list of available languages
   /// [currentLocale] is the locale to use (defaults to detected locale)
   /// [fallbackLocale] is the locale to fall back to if current is not found
-  LayrzAppLocalizations({required this.languages, Locale? currentLocale, this.fallbackLocale = const Locale('en')})
+  LayrzI18n({required this.languages, Locale? currentLocale, this.fallbackLocale = const Locale('en')})
     : locale = currentLocale ?? detectedLocale;
 
   /// The list of available languages.
@@ -49,41 +49,41 @@ class LayrzAppLocalizations {
   static Locale get detectedLocale => resolveDetectedLocale();
 
   /// Gets the current developer mode state.
-  bool get developerMode => LayrzAppLocalizations._developerMode;
+  bool get developerMode => LayrzI18n._developerMode;
 
   /// Sets the global developer mode state.
   ///
   /// Arguments:
   /// [value] is the new developer mode state
   static void setDeveloperMode(bool value) {
-    LayrzAppLocalizations._developerMode = value;
+    LayrzI18n._developerMode = value;
   }
 
-  /// Gets the instance of [LayrzAppLocalizations] for the given context.
+  /// Gets the instance of [LayrzI18n] for the given context.
   ///
-  /// This will assert if [LayrzAppLocalizations] is not found.
+  /// This will assert if [LayrzI18n] is not found.
   ///
   /// Arguments:
   /// [context] is the build context
   ///
   /// Returns:
-  /// The [LayrzAppLocalizations] instance.
-  static LayrzAppLocalizations of(BuildContext context) {
-    assert(debugCheckHasLayrzAppLocalizations(context));
-    return Localizations.of<LayrzAppLocalizations>(context, LayrzAppLocalizations)!;
+  /// The [LayrzI18n] instance.
+  static LayrzI18n of(BuildContext context) {
+    assert(debugCheckHasLayrzI18n(context));
+    return Localizations.of<LayrzI18n>(context, LayrzI18n)!;
   }
 
-  /// Gets the instance of [LayrzAppLocalizations] for the given context.
+  /// Gets the instance of [LayrzI18n] for the given context.
   ///
-  /// Returns null if [LayrzAppLocalizations] is not found.
+  /// Returns null if [LayrzI18n] is not found.
   ///
   /// Arguments:
   /// [context] is the build context
   ///
   /// Returns:
-  /// The [LayrzAppLocalizations] instance, or null.
-  static LayrzAppLocalizations? maybeOf(BuildContext context) {
-    return Localizations.of<LayrzAppLocalizations>(context, LayrzAppLocalizations);
+  /// The [LayrzI18n] instance, or null.
+  static LayrzI18n? maybeOf(BuildContext context) {
+    return Localizations.of<LayrzI18n>(context, LayrzI18n);
   }
 
   /// Loads translations for the current locale.
@@ -346,12 +346,12 @@ class LayrzAppLocalizations {
   ///
   /// Returns:
   /// A [LocalizationsDelegate] for wiring into MaterialApp or WidgetsApp.
-  static LocalizationsDelegate<LayrzAppLocalizations> delegate({
+  static LocalizationsDelegate<LayrzI18n> delegate({
     required List<AvailableLanguage?> languages,
     required List<Locale> supportedLocales,
     Locale fallbackLocale = const Locale('en'),
   }) {
-    return LayrzAppLocalizationsDelegate(
+    return LayrzI18nDelegate(
       languages: languages,
       supportedLocales: supportedLocales,
       fallbackLocale: fallbackLocale,

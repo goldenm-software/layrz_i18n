@@ -35,12 +35,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return WidgetsApp(
       color: const Color(0xFF000000),
-      locale: LayrzAppLocalizations.getClosestLocale(
-        supportedLocales: supportedLocales,
-        fallbackLocale: const Locale('en'),
-      ),
+      locale: LayrzI18n.getClosestLocale(supportedLocales: supportedLocales, fallbackLocale: const Locale('en')),
       localizationsDelegates: [
-        LayrzAppLocalizations.delegate(
+        LayrzI18n.delegate(
           languages: languages,
           supportedLocales: supportedLocales,
           fallbackLocale: const Locale('en'),

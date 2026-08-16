@@ -4,18 +4,18 @@ import 'package:flutter/widgets.dart';
 import '../models/available_language.dart';
 import 'localizations.dart';
 
-/// A [LocalizationsDelegate] for [LayrzAppLocalizations].
+/// A [LocalizationsDelegate] for [LayrzI18n].
 ///
 /// Provides localization support for a Flutter app by loading translations
 /// based on the current locale and specified supported locales.
-class LayrzAppLocalizationsDelegate extends LocalizationsDelegate<LayrzAppLocalizations> {
-  /// Creates a new [LayrzAppLocalizationsDelegate].
+class LayrzI18nDelegate extends LocalizationsDelegate<LayrzI18n> {
+  /// Creates a new [LayrzI18nDelegate].
   ///
   /// Arguments:
   /// [languages] is the list of available languages
   /// [supportedLocales] is the list of supported locales
   /// [fallbackLocale] is the locale to fall back to if no match is found
-  LayrzAppLocalizationsDelegate({
+  LayrzI18nDelegate({
     required this.languages,
     required this.supportedLocales,
     required this.fallbackLocale,
@@ -39,9 +39,9 @@ class LayrzAppLocalizationsDelegate extends LocalizationsDelegate<LayrzAppLocali
   }
 
   @override
-  Future<LayrzAppLocalizations> load(Locale locale) async {
+  Future<LayrzI18n> load(Locale locale) async {
     currentLocale = locale;
-    final localizations = LayrzAppLocalizations(
+    final localizations = LayrzI18n(
       languages: languages,
       currentLocale: locale,
       fallbackLocale: fallbackLocale,
@@ -51,26 +51,26 @@ class LayrzAppLocalizationsDelegate extends LocalizationsDelegate<LayrzAppLocali
   }
 
   @override
-  bool shouldReload(LayrzAppLocalizationsDelegate old) =>
+  bool shouldReload(LayrzI18nDelegate old) =>
       !listEquals(languages, old.languages) ||
       !listEquals(supportedLocales, old.supportedLocales) ||
       fallbackLocale != old.fallbackLocale;
 }
 
-/// Checks that [LayrzAppLocalizations] is available in the given context.
+/// Checks that [LayrzI18n] is available in the given context.
 ///
 /// This is a debug assertion that throws a [FlutterError] if
-/// [LayrzAppLocalizations] is not found. Always returns true in release builds.
+/// [LayrzI18n] is not found. Always returns true in release builds.
 ///
 /// Arguments:
 /// [context] is the build context to check
 ///
 /// Returns:
-/// True if [LayrzAppLocalizations] is available or in release mode.
-bool debugCheckHasLayrzAppLocalizations(BuildContext context) {
+/// True if [LayrzI18n] is available or in release mode.
+bool debugCheckHasLayrzI18n(BuildContext context) {
   assert(() {
-    if (Localizations.of<LayrzAppLocalizations>(context, LayrzAppLocalizations) == null) {
-      throw FlutterError('LayrzAppLocalizations was used before it was initialized');
+    if (Localizations.of<LayrzI18n>(context, LayrzI18n) == null) {
+      throw FlutterError('LayrzI18n was used before it was initialized');
     }
     return true;
   }());

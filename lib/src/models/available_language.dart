@@ -16,7 +16,7 @@ part 'available_language.g.dart';
 /// Note: Uses `@Freezed(makeCollectionsUnmodifiable: false)` to avoid wrapping
 /// the [messages] map in [EqualUnmodifiableMapView] on every accessor call.
 /// The default `makeCollectionsUnmodifiable: true` would add a wrapper indirection
-/// on the hottest path in the package ([LayrzAppLocalizations.load()] and [_raw()]),
+/// on the hottest path in the package ([LayrzI18n.load()] and [_raw()]),
 /// creating allocations on every widget build. The [messages] map is returned
 /// as-is; callers must not mutate it.
 @Freezed(makeCollectionsUnmodifiable: false)

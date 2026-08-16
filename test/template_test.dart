@@ -5,7 +5,7 @@ import 'package:layrz_i18n/src/engine/template.dart';
 
 void main() {
   group('Template tokenization and rendering', () {
-    late LayrzAppLocalizations i18n;
+    late LayrzI18n i18n;
 
     setUp(() async {
       final language = AvailableLanguage(
@@ -34,7 +34,7 @@ void main() {
         },
       );
 
-      i18n = LayrzAppLocalizations(
+      i18n = LayrzI18n(
         languages: [language],
         currentLocale: const Locale('en'),
         fallbackLocale: const Locale('en'),
@@ -45,7 +45,7 @@ void main() {
 
     tearDown(() {
       clearTemplateCache();
-      LayrzAppLocalizations.setDeveloperMode(false);
+      LayrzI18n.setDeveloperMode(false);
     });
 
     test('renders plain message with no markers', () {
@@ -181,7 +181,7 @@ void main() {
   });
 
   group('Rich text rendering (te)', () {
-    late LayrzAppLocalizations i18n;
+    late LayrzI18n i18n;
 
     setUp(() async {
       final language = AvailableLanguage(
@@ -195,7 +195,7 @@ void main() {
         },
       );
 
-      i18n = LayrzAppLocalizations(
+      i18n = LayrzI18n(
         languages: [language],
         currentLocale: const Locale('en'),
         fallbackLocale: const Locale('en'),
