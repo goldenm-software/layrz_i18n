@@ -195,11 +195,50 @@ void main() {
   });
 
   group('debugCheckHasLayrzAppLocalizations', () {
-    test('provides debug assertion checking in debug mode', () {
-      // debugCheckHasLayrzAppLocalizations is a debug-mode assertion helper
-      // In release builds, it always returns true
-      // In debug builds, it asserts if LayrzAppLocalizations is not found
-      expect(true, isTrue);
+    testWidgets('throws FlutterError when LayrzAppLocalizations not present', (WidgetTester tester) async {
+      expect(
+        () {
+          debugCheckHasLayrzAppLocalizations(
+            _MockBuildContext(),
+          );
+        },
+        throwsFlutterError,
+      );
+    });
+
+    testWidgets('returns true when LayrzAppLocalizations is present', (WidgetTester tester) async {
+      final languages = [
+        AvailableLanguage(
+          id: '1',
+          code: 'en',
+          name: 'English',
+          messages: const {},
+        ),
+      ];
+
+      final delegate = LayrzAppLocalizations.delegate(
+        languages: languages,
+        supportedLocales: const [Locale('en')],
+        fallbackLocale: const Locale('en'),
+      );
+
+      await tester.pumpWidget(
+        WidgetsApp(
+          color: const Color(0xFFFFFFFF),
+          localizationsDelegates: [delegate],
+          supportedLocales: const [Locale('en')],
+          builder: (BuildContext context, Widget? child) {
+            // This should not throw
+            expect(debugCheckHasLayrzAppLocalizations(context), isTrue);
+            return const SizedBox();
+          },
+        ),
+      );
     });
   });
+}
+
+class _MockBuildContext implements BuildContext {
+  @override
+  dynamic noSuchMethod(Invocation invocation) => null;
 }

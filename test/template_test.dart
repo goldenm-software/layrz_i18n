@@ -144,6 +144,24 @@ void main() {
       expect(cachedTemplateCount, equals(0));
     });
 
+    test('cache overflow clears cache when reaching 1024 entries', () {
+      clearTemplateCache();
+      expect(cachedTemplateCount, equals(0));
+
+      // Manually trigger cache overflow by adding many templates
+      // (Since we can't easily generate 1024 unique messages in the test,
+      // we test the behavior of getTemplate which handles the overflow)
+      for (int i = 0; i < 1024; i++) {
+        getTemplate('message_$i');
+      }
+      expect(cachedTemplateCount, equals(1024));
+
+      // Next call should clear the cache
+      getTemplate('message_1024');
+      // After clear and add, should have only the new one
+      expect(cachedTemplateCount, equals(1));
+    });
+
     test('plural message called via t() returns full string with separator', () {
       final result = i18n.t('plural');
       expect(result, equals('One item | Many items'));

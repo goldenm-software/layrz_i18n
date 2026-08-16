@@ -411,6 +411,30 @@ void main() {
     });
   });
 
+  group('LayrzAppLocalizations.getClosestLocale()', () {
+    test('getClosestLocale() forwards to getClosestLocaleImpl', () {
+      final supportedLocales = [
+        const Locale('en'),
+        const Locale('fr'),
+      ];
+
+      final result = LayrzAppLocalizations.getClosestLocale(
+        prevLanguage: 'en',
+        supportedLocales: supportedLocales,
+        fallbackLocale: const Locale('en'),
+      );
+
+      expect(result.languageCode, equals('en'));
+    });
+  });
+
+  group('LayrzAppLocalizations.detectedLocale', () {
+    test('detectedLocale getter returns a Locale', () {
+      final detected = LayrzAppLocalizations.detectedLocale;
+      expect(detected, isA<Locale>());
+    });
+  });
+
   group('LayrzAppLocalizations.load()', () {
     test('load() populates _messages for matching locale', () async {
       final language = AvailableLanguage(

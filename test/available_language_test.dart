@@ -85,6 +85,25 @@ void main() {
       expect(lang.messages, isNull);
     });
 
+    test('fromJson()/toJson() round-trip with null fields', () {
+      final original = AvailableLanguage(
+        id: null,
+        name: null,
+        code: 'en',
+        fallback: null,
+        messages: null,
+      );
+
+      final json = original.toJson();
+      final restored = AvailableLanguage.fromJson(json);
+
+      expect(restored.id, isNull);
+      expect(restored.name, isNull);
+      expect(restored.code, equals('en'));
+      expect(restored.fallback, isNull);
+      expect(restored.messages, isNull);
+    });
+
     test('getLocale() parses simple language code', () {
       final lang = AvailableLanguage(
         id: '1',
