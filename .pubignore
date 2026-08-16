@@ -1,4 +1,5 @@
 .github/
+tool/
 .githooks/
 Makefile
 /.dart_tool
