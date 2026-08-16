@@ -16,7 +16,7 @@ void main() {
         ),
       ];
 
-      final delegate = LayrzAppLocalizations.delegate(
+      final delegate = LayrzI18n.delegate(
         languages: languages,
         supportedLocales: const [Locale('en')],
         fallbackLocale: const Locale('en'),
@@ -52,7 +52,7 @@ void main() {
         ),
       ];
 
-      final delegate = LayrzAppLocalizations.delegate(
+      final delegate = LayrzI18n.delegate(
         languages: languages,
         supportedLocales: const [Locale('en')],
         fallbackLocale: const Locale('en'),
@@ -88,7 +88,7 @@ void main() {
         ),
       ];
 
-      final delegate = LayrzAppLocalizations.delegate(
+      final delegate = LayrzI18n.delegate(
         languages: languages,
         supportedLocales: const [Locale('en')],
         fallbackLocale: const Locale('en'),
@@ -125,7 +125,7 @@ void main() {
       expect(find.text('No i18n'), findsOneWidget);
     });
 
-    testWidgets('context.i18n throws when LayrzAppLocalizations not present', (WidgetTester tester) async {
+    testWidgets('context.i18n throws when LayrzI18n not present', (WidgetTester tester) async {
       late String errorMessage;
 
       await tester.pumpWidget(
@@ -133,7 +133,7 @@ void main() {
           color: const Color(0xFFFFFFFF),
           builder: (BuildContext context, Widget? child) {
             try {
-              // This should throw because LayrzAppLocalizations is not in the tree
+              // This should throw because LayrzI18n is not in the tree
               final _ = context.i18n;
               return const Text('No error');
             } on FlutterError catch (e) {
@@ -144,13 +144,13 @@ void main() {
         ),
       );
 
-      // Verify that it threw and the error message is about LayrzAppLocalizations not being initialized
+      // Verify that it threw and the error message is about LayrzI18n not being initialized
       expect(
         find.byWidgetPredicate(
           (Widget widget) =>
               widget is Text &&
               widget.data != null &&
-              widget.data!.contains('LayrzAppLocalizations was used before it was initialized'),
+              widget.data!.contains('LayrzI18n was used before it was initialized'),
         ),
         findsOneWidget,
       );

@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:layrz_i18n/layrz_i18n.dart';
 
 void main() {
-  group('LayrzAppLocalizations.t()', () {
-    late LayrzAppLocalizations i18n;
+  group('LayrzI18n.t()', () {
+    late LayrzI18n i18n;
 
     setUp(() {
       final language = AvailableLanguage(
@@ -18,7 +18,7 @@ void main() {
         },
       );
 
-      i18n = LayrzAppLocalizations(
+      i18n = LayrzI18n(
         languages: [language],
         currentLocale: const Locale('en'),
         fallbackLocale: const Locale('en'),
@@ -27,7 +27,7 @@ void main() {
     });
 
     tearDown(() {
-      LayrzAppLocalizations.setDeveloperMode(false);
+      LayrzI18n.setDeveloperMode(false);
     });
 
     test('t() with plain key returns translated string', () {
@@ -46,8 +46,8 @@ void main() {
     });
   });
 
-  group('LayrzAppLocalizations.tc()', () {
-    late LayrzAppLocalizations i18n;
+  group('LayrzI18n.tc()', () {
+    late LayrzI18n i18n;
 
     setUp(() {
       final language = AvailableLanguage(
@@ -62,7 +62,7 @@ void main() {
         },
       );
 
-      i18n = LayrzAppLocalizations(
+      i18n = LayrzI18n(
         languages: [language],
         currentLocale: const Locale('en'),
         fallbackLocale: const Locale('en'),
@@ -71,7 +71,7 @@ void main() {
     });
 
     tearDown(() {
-      LayrzAppLocalizations.setDeveloperMode(false);
+      LayrzI18n.setDeveloperMode(false);
     });
 
     test('tc() with val=1 returns first form', () {
@@ -120,8 +120,8 @@ void main() {
     });
   });
 
-  group('LayrzAppLocalizations.te()', () {
-    late LayrzAppLocalizations i18n;
+  group('LayrzI18n.te()', () {
+    late LayrzI18n i18n;
 
     setUp(() {
       final language = AvailableLanguage(
@@ -135,7 +135,7 @@ void main() {
         },
       );
 
-      i18n = LayrzAppLocalizations(
+      i18n = LayrzI18n(
         languages: [language],
         currentLocale: const Locale('en'),
         fallbackLocale: const Locale('en'),
@@ -144,7 +144,7 @@ void main() {
     });
 
     tearDown(() {
-      LayrzAppLocalizations.setDeveloperMode(false);
+      LayrzI18n.setDeveloperMode(false);
     });
 
     test('te() returns TextSpan with text', () {
@@ -181,8 +181,8 @@ void main() {
     });
   });
 
-  group('LayrzAppLocalizations.tce()', () {
-    late LayrzAppLocalizations i18n;
+  group('LayrzI18n.tce()', () {
+    late LayrzI18n i18n;
 
     setUp(() {
       final language = AvailableLanguage(
@@ -195,7 +195,7 @@ void main() {
         },
       );
 
-      i18n = LayrzAppLocalizations(
+      i18n = LayrzI18n(
         languages: [language],
         currentLocale: const Locale('en'),
         fallbackLocale: const Locale('en'),
@@ -204,7 +204,7 @@ void main() {
     });
 
     tearDown(() {
-      LayrzAppLocalizations.setDeveloperMode(false);
+      LayrzI18n.setDeveloperMode(false);
     });
 
     test('tce() combines plural selection and rich rendering', () {
@@ -232,8 +232,8 @@ void main() {
     });
   });
 
-  group('LayrzAppLocalizations.hasTranslation()', () {
-    late LayrzAppLocalizations i18n;
+  group('LayrzI18n.hasTranslation()', () {
+    late LayrzI18n i18n;
 
     setUp(() {
       final language = AvailableLanguage(
@@ -245,7 +245,7 @@ void main() {
         },
       );
 
-      i18n = LayrzAppLocalizations(
+      i18n = LayrzI18n(
         languages: [language],
         currentLocale: const Locale('en'),
         fallbackLocale: const Locale('en'),
@@ -262,8 +262,8 @@ void main() {
     });
   });
 
-  group('LayrzAppLocalizations fallback chain', () {
-    late LayrzAppLocalizations i18n;
+  group('LayrzI18n fallback chain', () {
+    late LayrzI18n i18n;
 
     setUp(() async {
       final current = AvailableLanguage(
@@ -286,7 +286,7 @@ void main() {
         },
       );
 
-      i18n = LayrzAppLocalizations(
+      i18n = LayrzI18n(
         languages: [current, fallback],
         currentLocale: const Locale('en'),
         fallbackLocale: const Locale('fr'),
@@ -295,7 +295,7 @@ void main() {
     });
 
     tearDown(() {
-      LayrzAppLocalizations.setDeveloperMode(false);
+      LayrzI18n.setDeveloperMode(false);
     });
 
     test('t() hits _messages for current locale key', () {
@@ -324,8 +324,8 @@ void main() {
     });
   });
 
-  group('LayrzAppLocalizations developer mode', () {
-    late LayrzAppLocalizations i18n;
+  group('LayrzI18n developer mode', () {
+    late LayrzI18n i18n;
 
     setUp(() async {
       final language = AvailableLanguage(
@@ -337,7 +337,7 @@ void main() {
         },
       );
 
-      i18n = LayrzAppLocalizations(
+      i18n = LayrzI18n(
         languages: [language],
         currentLocale: const Locale('en'),
         fallbackLocale: const Locale('en'),
@@ -346,45 +346,45 @@ void main() {
     });
 
     tearDown(() {
-      LayrzAppLocalizations.setDeveloperMode(false);
+      LayrzI18n.setDeveloperMode(false);
     });
 
     test('setDeveloperMode(true) changes t() output to debug format', () {
-      LayrzAppLocalizations.setDeveloperMode(true);
+      LayrzI18n.setDeveloperMode(true);
       final result = i18n.t('key', {'arg': 'value'});
       expect(result, contains('key'));
       expect(result, contains('arg'));
     });
 
     test('setDeveloperMode(true) changes tc() output to debug format', () {
-      LayrzAppLocalizations.setDeveloperMode(true);
+      LayrzI18n.setDeveloperMode(true);
       final result = i18n.tc('key', 1, {'arg': 'value'});
       expect(result, contains('key'));
       expect(result, contains('1'));
     });
 
     test('setDeveloperMode(true) changes te() output to debug format', () {
-      LayrzAppLocalizations.setDeveloperMode(true);
+      LayrzI18n.setDeveloperMode(true);
       final result = i18n.te('key', args: {'arg': 'value'});
       expect(result.text, contains('key'));
     });
 
     test('setDeveloperMode(true) changes tce() output to debug format', () {
-      LayrzAppLocalizations.setDeveloperMode(true);
+      LayrzI18n.setDeveloperMode(true);
       final result = i18n.tce('key', 1, args: {'arg': 'value'});
       expect(result.text, contains('key'));
     });
 
     test('setDeveloperMode(false) restores normal output', () {
-      LayrzAppLocalizations.setDeveloperMode(true);
-      LayrzAppLocalizations.setDeveloperMode(false);
+      LayrzI18n.setDeveloperMode(true);
+      LayrzI18n.setDeveloperMode(false);
       final result = i18n.t('key');
       expect(result, equals('Value'));
     });
   });
 
-  group('LayrzAppLocalizations.translate() deprecated shim', () {
-    late LayrzAppLocalizations i18n;
+  group('LayrzI18n.translate() deprecated shim', () {
+    late LayrzI18n i18n;
 
     setUp(() {
       final language = AvailableLanguage(
@@ -396,7 +396,7 @@ void main() {
         },
       );
 
-      i18n = LayrzAppLocalizations(
+      i18n = LayrzI18n(
         languages: [language],
         currentLocale: const Locale('en'),
         fallbackLocale: const Locale('en'),
@@ -411,14 +411,14 @@ void main() {
     });
   });
 
-  group('LayrzAppLocalizations.getClosestLocale()', () {
+  group('LayrzI18n.getClosestLocale()', () {
     test('getClosestLocale() forwards to getClosestLocaleImpl', () {
       final supportedLocales = [
         const Locale('en'),
         const Locale('fr'),
       ];
 
-      final result = LayrzAppLocalizations.getClosestLocale(
+      final result = LayrzI18n.getClosestLocale(
         prevLanguage: 'en',
         supportedLocales: supportedLocales,
         fallbackLocale: const Locale('en'),
@@ -428,14 +428,14 @@ void main() {
     });
   });
 
-  group('LayrzAppLocalizations.detectedLocale', () {
+  group('LayrzI18n.detectedLocale', () {
     test('detectedLocale getter returns a Locale', () {
-      final detected = LayrzAppLocalizations.detectedLocale;
+      final detected = LayrzI18n.detectedLocale;
       expect(detected, isA<Locale>());
     });
   });
 
-  group('LayrzAppLocalizations.load()', () {
+  group('LayrzI18n.load()', () {
     test('load() populates _messages for matching locale', () async {
       final language = AvailableLanguage(
         id: '1',
@@ -446,7 +446,7 @@ void main() {
         },
       );
 
-      final i18n = LayrzAppLocalizations(
+      final i18n = LayrzI18n(
         languages: [language],
         currentLocale: const Locale('en'),
         fallbackLocale: const Locale('en'),
@@ -466,7 +466,7 @@ void main() {
         },
       );
 
-      final i18n = LayrzAppLocalizations(
+      final i18n = LayrzI18n(
         languages: [language],
         currentLocale: const Locale('en'),
         fallbackLocale: const Locale('en'),
@@ -486,7 +486,7 @@ void main() {
         },
       );
 
-      final i18n = LayrzAppLocalizations(
+      final i18n = LayrzI18n(
         languages: [fallback],
         currentLocale: const Locale('fr'),
         fallbackLocale: const Locale('en'),

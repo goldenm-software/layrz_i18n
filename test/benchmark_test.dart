@@ -133,7 +133,7 @@ class _BaselineOldEngine {
 
 void main() {
   group('Benchmarks - Performance Comparison', () {
-    late LayrzAppLocalizations i18n;
+    late LayrzI18n i18n;
     late _BaselineOldEngine baseline;
     late Map<String, String> testMessages;
 
@@ -162,7 +162,7 @@ void main() {
         messages: testMessages,
       );
 
-      i18n = LayrzAppLocalizations(
+      i18n = LayrzI18n(
         languages: [language],
         currentLocale: const Locale('en'),
         fallbackLocale: const Locale('en'),
@@ -344,7 +344,7 @@ void main() {
       // New implementation
       final stopNew = Stopwatch()..start();
       for (int i = 0; i < 100; i++) {
-        final tempI18n = LayrzAppLocalizations(
+        final tempI18n = LayrzI18n(
           languages: [language],
           currentLocale: const Locale('en'),
           fallbackLocale: const Locale('en'),

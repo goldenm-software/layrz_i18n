@@ -3,19 +3,19 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:layrz_i18n/layrz_i18n.dart';
 
 void main() {
-  group('LayrzAppLocalizationsDelegate', () {
-    test('LayrzAppLocalizations.of() asserts when not present in context', () {
+  group('LayrzI18nDelegate', () {
+    test('LayrzI18n.of() asserts when not present in context', () {
       // This test verifies the assertion check exists
       // Full widget tree testing is covered by maybeOf() and other tests
       expect(true, isTrue);
     });
 
-    testWidgets('LayrzAppLocalizations.maybeOf() returns null when not present', (WidgetTester tester) async {
+    testWidgets('LayrzI18n.maybeOf() returns null when not present', (WidgetTester tester) async {
       await tester.pumpWidget(
         WidgetsApp(
           color: const Color(0xFFFFFFFF),
           builder: (BuildContext context, Widget? child) {
-            final i18n = LayrzAppLocalizations.maybeOf(context);
+            final i18n = LayrzI18n.maybeOf(context);
             return Text(i18n == null ? 'No i18n' : 'Has i18n');
           },
         ),
@@ -43,7 +43,7 @@ void main() {
       final supportedLocales = [const Locale('en'), const Locale('fr')];
       final fallbackLocale = const Locale('en');
 
-      final delegate = LayrzAppLocalizations.delegate(
+      final delegate = LayrzI18n.delegate(
         languages: languages,
         supportedLocales: supportedLocales,
         fallbackLocale: fallbackLocale,
@@ -77,17 +77,17 @@ void main() {
       final supportedLocales = [const Locale('en')];
       final fallbackLocale = const Locale('en');
 
-      final delegate1 = LayrzAppLocalizations.delegate(
+      final delegate1 = LayrzI18n.delegate(
         languages: languages1,
         supportedLocales: supportedLocales,
         fallbackLocale: fallbackLocale,
-      ) as LayrzAppLocalizationsDelegate;
+      ) as LayrzI18nDelegate;
 
-      final delegate2 = LayrzAppLocalizations.delegate(
+      final delegate2 = LayrzI18n.delegate(
         languages: languages2,
         supportedLocales: supportedLocales,
         fallbackLocale: fallbackLocale,
-      ) as LayrzAppLocalizationsDelegate;
+      ) as LayrzI18nDelegate;
 
       expect(delegate1.shouldReload(delegate2), isFalse);
     });
@@ -114,17 +114,17 @@ void main() {
       final supportedLocales = [const Locale('en')];
       final fallbackLocale = const Locale('en');
 
-      final delegate1 = LayrzAppLocalizations.delegate(
+      final delegate1 = LayrzI18n.delegate(
         languages: languages1,
         supportedLocales: supportedLocales,
         fallbackLocale: fallbackLocale,
-      ) as LayrzAppLocalizationsDelegate;
+      ) as LayrzI18nDelegate;
 
-      final delegate2 = LayrzAppLocalizations.delegate(
+      final delegate2 = LayrzI18n.delegate(
         languages: languages2,
         supportedLocales: supportedLocales,
         fallbackLocale: fallbackLocale,
-      ) as LayrzAppLocalizationsDelegate;
+      ) as LayrzI18nDelegate;
 
       expect(delegate1.shouldReload(delegate2), isTrue);
     });
@@ -143,17 +143,17 @@ void main() {
       final supportedLocales2 = [const Locale('en'), const Locale('fr')];
       final fallbackLocale = const Locale('en');
 
-      final delegate1 = LayrzAppLocalizations.delegate(
+      final delegate1 = LayrzI18n.delegate(
         languages: languages,
         supportedLocales: supportedLocales1,
         fallbackLocale: fallbackLocale,
-      ) as LayrzAppLocalizationsDelegate;
+      ) as LayrzI18nDelegate;
 
-      final delegate2 = LayrzAppLocalizations.delegate(
+      final delegate2 = LayrzI18n.delegate(
         languages: languages,
         supportedLocales: supportedLocales2,
         fallbackLocale: fallbackLocale,
-      ) as LayrzAppLocalizationsDelegate;
+      ) as LayrzI18nDelegate;
 
       expect(delegate1.shouldReload(delegate2), isTrue);
     });
@@ -172,17 +172,17 @@ void main() {
       final fallbackLocale1 = const Locale('en');
       final fallbackLocale2 = const Locale('fr');
 
-      final delegate1 = LayrzAppLocalizations.delegate(
+      final delegate1 = LayrzI18n.delegate(
         languages: languages,
         supportedLocales: supportedLocales,
         fallbackLocale: fallbackLocale1,
-      ) as LayrzAppLocalizationsDelegate;
+      ) as LayrzI18nDelegate;
 
-      final delegate2 = LayrzAppLocalizations.delegate(
+      final delegate2 = LayrzI18n.delegate(
         languages: languages,
         supportedLocales: supportedLocales,
         fallbackLocale: fallbackLocale2,
-      ) as LayrzAppLocalizationsDelegate;
+      ) as LayrzI18nDelegate;
 
       expect(delegate1.shouldReload(delegate2), isTrue);
     });
@@ -194,11 +194,11 @@ void main() {
     });
   });
 
-  group('debugCheckHasLayrzAppLocalizations', () {
-    testWidgets('throws FlutterError when LayrzAppLocalizations not present', (WidgetTester tester) async {
+  group('debugCheckHasLayrzI18n', () {
+    testWidgets('throws FlutterError when LayrzI18n not present', (WidgetTester tester) async {
       expect(
         () {
-          debugCheckHasLayrzAppLocalizations(
+          debugCheckHasLayrzI18n(
             _MockBuildContext(),
           );
         },
@@ -206,7 +206,7 @@ void main() {
       );
     });
 
-    testWidgets('returns true when LayrzAppLocalizations is present', (WidgetTester tester) async {
+    testWidgets('returns true when LayrzI18n is present', (WidgetTester tester) async {
       final languages = [
         AvailableLanguage(
           id: '1',
@@ -216,7 +216,7 @@ void main() {
         ),
       ];
 
-      final delegate = LayrzAppLocalizations.delegate(
+      final delegate = LayrzI18n.delegate(
         languages: languages,
         supportedLocales: const [Locale('en')],
         fallbackLocale: const Locale('en'),
@@ -229,7 +229,7 @@ void main() {
           supportedLocales: const [Locale('en')],
           builder: (BuildContext context, Widget? child) {
             // This should not throw
-            expect(debugCheckHasLayrzAppLocalizations(context), isTrue);
+            expect(debugCheckHasLayrzI18n(context), isTrue);
             return const SizedBox();
           },
         ),
