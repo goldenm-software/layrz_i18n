@@ -1,3 +1,14 @@
 .github/
 .githooks/
 Makefile
+/.dart_tool
+/.metadata
+/.packages
+/build
+/coverage
+/test
+example/build
+example/.dart_tool
+example/pubspec.lock
+.gitattributes
+*.iml
