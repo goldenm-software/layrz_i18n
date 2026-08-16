@@ -6,122 +6,21 @@
 
 A lightweight internationalization (i18n) engine for Flutter — runtime translations loaded from your own backend or assets, plural forms, rich-text interpolation and automatic locale detection. Imports only `package:flutter/widgets.dart` — no Material or Cupertino — so it works under a bare `WidgetsApp`. Runs on every platform Flutter supports, including web.
 
-## Usage
+## Documentation
 
-Define your languages with translated messages:
+Complete documentation is available on the [layrz_i18n wiki](https://github.com/goldenm-software/layrz_i18n/wiki):
 
-```dart
-final languages = [
-  AvailableLanguage(
-    id: '1',
-    name: 'English',
-    code: 'en',
-    fallback: 'en',
-    messages: {
-      'greeting': 'Hello, {name}!',
-      'items': 'One item | {count} items',
-      'welcome': 'Welcome to [link]',
-    },
-  ),
-  AvailableLanguage(
-    id: '2',
-    name: 'Español',
-    code: 'es',
-    fallback: 'en',
-    messages: {
-      'greeting': '¡Hola, {name}!',
-      'items': 'Un elemento | {count} elementos',
-      'welcome': 'Bienvenido a [link]',
-    },
-  ),
-];
-
-final supportedLocales = languages.map((l) => l.getLocale()).toList();
-```
-
-Wire the localizations delegate into your `WidgetsApp`:
-
-```dart
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return WidgetsApp(
-      color: const Color(0xFF000000),
-      locale: LayrzAppLocalizations.getClosestLocale(
-        supportedLocales: supportedLocales,
-        fallbackLocale: const Locale('en'),
-      ),
-      localizationsDelegates: [
-        LayrzAppLocalizations.delegate(
-          languages: languages,
-          supportedLocales: supportedLocales,
-          fallbackLocale: const Locale('en'),
-        ),
-      ],
-      supportedLocales: supportedLocales,
-      builder: (BuildContext context, Widget? child) {
-        return Directionality(
-          textDirection: TextDirection.ltr,
-          child: const HomePage(),
-        );
-      },
-    );
-  }
-}
-```
-
-Translate strings in your widgets:
-
-```dart
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(context.i18n.t('greeting', {'name': 'Alice'})),
-        Text(context.i18n.tc('items', 5, {'count': '5'})),
-        RichText(text: context.i18n.te('welcome', richArgs: {'link': TextSpan(text: 'our site')})),
-      ],
-    );
-  }
-}
-```
-
-Alternatively, you can use `LayrzAppLocalizations.of(context)` for the explicit form:
-
-```dart
-final i18n = LayrzAppLocalizations.of(context);
-Text(i18n.t('greeting', {'name': 'Alice'}))
-```
-
-## Message syntax
-
-| Syntax | Purpose | Example |
-|--------|---------|---------|
-| `{key}` | Plain-text argument marker | `'Hello, {name}!'` → `'Hello, Alice!'` with `t()` |
-| `[key]` | Rich-text argument (resolved to `InlineSpan`) | `'Click [link]'` → `TextSpan` with rich argument via `te()` |
-| ` \| ` | Plural form separator (singular \| plural) | `'One item \| {count} items'` with `tc()` or `tce()` |
-
-**Translation methods:**
-- `t(key, args)` → `String`: translate with plain-text arguments
-- `tc(key, count, args)` → `String`: pluralize and translate with plain-text arguments
-- `te(key, args, richArgs, style)` → `TextSpan`: translate with rich-text arguments
-- `tce(key, count, args, richArgs, style)` → `TextSpan`: pluralize and translate with rich-text arguments
+- **[Getting Started](https://github.com/goldenm-software/layrz_i18n/wiki/Getting-Started)** — Installation and basic setup
+- **[Message Syntax](https://github.com/goldenm-software/layrz_i18n/wiki/Message-Syntax)** — Translation keys, placeholders, and pluralization
+- **[Context Extension](https://github.com/goldenm-software/layrz_i18n/wiki/Context-Extension)** — Accessing translations via `context.i18n`
+- **[Locale Detection](https://github.com/goldenm-software/layrz_i18n/wiki/Locale-Detection)** — Automatic language selection and fallbacks
+- **[Developer Mode](https://github.com/goldenm-software/layrz_i18n/wiki/Developer-Mode)** — Debugging translations in development
 
 ## FAQ
 
 ### Is this the same as the i18n engine in `layrz_models`?
 
-Yes in origin: this package is that engine extracted into a standalone package, optimized, and freed of its `layrz_models` dependency. The public API is source-compatible, so migrating is an import change. See the [CHANGELOG](CHANGELOG.md) for intentional improvements and breaking changes.
+Yes in origin: this package is that engine extracted into a standalone package, optimized, and freed of its `layrz_models` dependency. **Note**: Migrating from `layrz_models` requires renaming the main classes — `LayrzAppLocalizations` is now `LayrzI18n`, and `LayrzAppLocalizationsDelegate` is now `LayrzI18nDelegate`. The `debugCheckHasLayrzAppLocalizations` function is now `debugCheckHasLayrzI18n`. See the [CHANGELOG](CHANGELOG.md) for full details on breaking changes.
 
 ### Why is this package called `layrz_i18n`?
 

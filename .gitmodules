@@ -1,0 +1,3 @@
+[submodule "wiki"]
+	path = wiki
+	url = https://github.com/goldenm-software/layrz_i18n.wiki.git
