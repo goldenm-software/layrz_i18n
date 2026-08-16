@@ -36,11 +36,25 @@ jobs:
     if: always() && github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v6
+
       - name: Download Dart coverage artifacts
         uses: actions/download-artifact@v8
         with:
           name: dart-coverage-${{ github.run_id }}
           path: dart-coverage
+
+      - name: Setup Flutter
+        uses: flutter-actions/setup-flutter@v4
+        with:
+          channel: stable
+          version: "3.47.0"
+          cache: true
+          cache-sdk: true
+          cache-key: ${{ runner.os }}-flutter-${{ hashFiles('pubspec.yaml') }}
+
+      - name: Strip coverage-ignored regions
+        run: dart tool/strip_ignored_coverage.dart dart-coverage/lcov.info
 
       - uses: goldenm-software/layrz-actions/.github/actions/coverage-comment@v1
         with:
