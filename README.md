@@ -84,18 +84,23 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final i18n = LayrzAppLocalizations.of(context);
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(i18n.t('greeting', {'name': 'Alice'})),
-        Text(i18n.tc('items', 5, {'count': '5'})),
-        RichText(text: i18n.te('welcome', richArgs: {'link': TextSpan(text: 'our site')})),
+        Text(context.i18n.t('greeting', {'name': 'Alice'})),
+        Text(context.i18n.tc('items', 5, {'count': '5'})),
+        RichText(text: context.i18n.te('welcome', richArgs: {'link': TextSpan(text: 'our site')})),
       ],
     );
   }
 }
+```
+
+Alternatively, you can use `LayrzAppLocalizations.of(context)` for the explicit form:
+
+```dart
+final i18n = LayrzAppLocalizations.of(context);
+Text(i18n.t('greeting', {'name': 'Alice'}))
 ```
 
 ## Message syntax

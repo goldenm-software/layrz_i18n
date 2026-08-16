@@ -1,6 +1,8 @@
-## 0.0.1
+# Changelog
 
-- Initial release: the i18n engine extracted from `layrz_models` into a standalone package with performance optimizations
+## 1.0.0
+
+- **New**: `BuildContext` extension `LayrzI18nContextExtension` with `i18n` and `maybeI18n` getters for ergonomic access to translations (`context.i18n.t('key')` instead of `LayrzAppLocalizations.of(context).t('key')`)
 - **Note**: Depends on the Flutter SDK, `freezed_annotation`, `json_annotation`, `collection`, and `web`. No dependency on Material Design or layrz_models; works with WidgetsApp and custom widget trees.
 - **New**: Single-pass tokenizer with template caching for efficient message rendering
 - **New**: Content-keyed template cache (up to 1,024 entries) — entries never stale across locale switches
@@ -10,3 +12,7 @@
 - **Change**: Removed unused `padding` parameter from `te()`
 - **Change**: `AvailableLanguage.messages` map returned as-is (not wrapped in `EqualUnmodifiableMapView`) for performance — avoids allocations on the hottest path (every translate call); callers must not mutate it
 - **Fix**: Fixed locale parsing bug where `'en-'` and `'en_'` produced invalid `Locale('en','')`
+
+## 0.0.1
+
+- Initial release: the i18n engine extracted from `layrz_models` into a standalone package with performance optimizations
