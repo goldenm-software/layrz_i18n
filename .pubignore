@@ -12,3 +12,4 @@ example/.dart_tool
 example/pubspec.lock
 .gitattributes
 *.iml
+wiki/
