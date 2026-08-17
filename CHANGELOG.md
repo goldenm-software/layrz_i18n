@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+
+- Adjusted version constraints to support parity and smooth migration from legacy packages.
+
 ## 1.0.0
 
 - **Breaking**: `LayrzAppLocalizations` is now `LayrzI18n`

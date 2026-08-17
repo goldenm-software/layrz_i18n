@@ -1,6 +1,6 @@
 name: layrz_i18n
 description: "Lightweight internationalization engine for Flutter — translations, plurals, rich text and locale detection. No Material dependency."
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/goldenm-software/layrz_i18n
 repository: https://github.com/goldenm-software/layrz_i18n
 
@@ -13,8 +13,8 @@ platforms:
   web:
 
 environment:
-  sdk: ">=3.13.0 <4.0.0"
-  flutter: ">=3.47.0"
+  sdk: ">=3.12.0 <4.0.0"
+  flutter: ">=3.44.0"
 
 dependencies:
   collection: ^1.19.0
